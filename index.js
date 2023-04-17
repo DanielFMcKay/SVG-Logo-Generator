@@ -45,10 +45,12 @@ inquirer.prompt([
             if (hexResponse.includes("#")) {
                 const pass = response.match(/^#(?:([0-9a-fA-F]{3}){1,2})$/)
                 if (pass === null) {
-                    return "Please enter a valid hexidecimal color. It must include a '#' symbol followed by three or six digits that are either numbers or the letters a-f."
+                    return "Please enter a valid hexidecimal color. After the '#' symbol you must enter three or six digits that are either numbers or the letters a-f."
                 } else {
                     return true;
                 }
+            } else {
+                return "Please enter a valid hexidecimal color. It must start with a '#' symbol, followed by three or six digits that are either numbers or the letters a-f."
             }
         }
     },
@@ -88,20 +90,22 @@ inquirer.prompt([
             if (hexResponse.includes("#")) {
                 const pass = response.match(/^#(?:([0-9a-fA-F]{3}){1,2})$/)
                 if (pass === null) {
-                    return "Please enter a valid hexidecimal color. It must include a '#' symbol followed by three or six digits that are either numbers or the letters a-f."
+                    return "Please enter a valid hexidecimal color. After the '#' symbol you must enter three or six digits that are either numbers or the letters a-f."
                 } else {
                     return true;
                 }
+            } else {
+                return "Please enter a valid hexidecimal color. It must start with a '#' symbol, followed by three or six digits that are either numbers or the letters a-f."
             }
         }
-    }
+    },
 ]).then(response => {
 fs.writeFile('./Outputs/logo.svg', generateLogo
 (response), (err) => {
     if (err) {
       return console.log(err);
     }
-    console.log('Success!!! MUAHAHAHAHAHAHAHA!!!!... probably');
+    console.log('Generated logo.svg');
   });
 });
 
