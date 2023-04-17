@@ -1,0 +1,8 @@
+<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+
+  <path d="M 46 100 L 98 10 L 202 10 L 254 100 L 202 190 L 98 190 Z" fill="darkcyan" />
+
+  <text x="150" y="115" font-family="Tahoma"
+  font-size="60" text-anchor="middle" fill="white">SVG</text>
+
+</svg>
