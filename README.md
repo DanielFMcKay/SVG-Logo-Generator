@@ -3,9 +3,19 @@
 ### By Dan McKay
 
 ## Overview
-This is an assignment for BootCamp Spot, week 10, as part of their Full Stack Coding Bootcamp as offered via UC Berkeley continuing education. It is a simple logo creator in the svg format using Node JS command prompts entered by user in a coding terminl.
+This is an assignment for BootCamp Spot, week 10, as part of their Full Stack Coding Bootcamp as offered via UC Berkeley continuing education. It is a simple logo creator in the svg format using Node JS command prompts entered by user in a coding terminal.
 
-### This ReadMe is a placeholder
+* It prompts the user initially for up to three digits for a logo.
+* Next it prompts for a text color, first asking the user if they want to select from a list or use a hexadecimal code.
+* If the hexadecimal color is entered incorrectly, the program will ask the user to try again.
+* Next it prompts for a shape (circle, square, triangle, hexagon, inverted triangle).
+* It also prompts for a background color.
+* Finally it prompts for a choice of one of several fonts.
+* When the logo is generated, a confirmation is printed on a command line and a logo.svg file is generated in an /outputs file.
+
+## [Video Demo](https://drive.google.com/file/d/13D3CvYbtPKXo9MtM9rkjdtgvrE0PG2MW/view)
+
+This is still a work in progress but core functionality is complete.
 
 ### User Story
 
@@ -41,3 +51,4 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 ```
 
 
+(C) Dan McKay 2023
