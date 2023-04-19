@@ -39,7 +39,7 @@ inquirer.prompt([
     },
     {
         name: 'textColor',
-        message: "Please enter a 3 or 6-digit hexadecimal color, starting with a '#'. Warning: I will personally judge you if you choose a 3-digit number like a plebian.",
+        message: "Please enter a 3 or 6-digit hexadecimal color, starting with a '#'. Warning: I will personally judge you if you choose a 3-digit number for being uncreative.",
         type: 'input',
         default: '#ffffff',
         when: (answers) => answers.textColorChoice === 'text-hex-color',
