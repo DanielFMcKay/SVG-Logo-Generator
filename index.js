@@ -1,9 +1,11 @@
-const fs = require('fs');
+const fs = require('fs')
 
 const inquirer = require('inquirer');
 
 // calls the logo rendering function and its child functions
-const generateLogo = require('./lib/shapes.js');
+const shapeChooser = require('./lib/shape-chooser.js');
+
+
 
 inquirer.prompt([
     {
@@ -13,7 +15,7 @@ inquirer.prompt([
         message: 'What do you wish to stamp on your logo? You can use up to three characters.',
         type: 'input',
         validate(chara) {
-            if (chara.length <= 3) {
+            if (chara.length > 3) {
                 return "You cannot use more than three characters for your logo, please try again."
             }
             else return true
@@ -21,36 +23,36 @@ inquirer.prompt([
     },
     {
         name: 'textColorChoice',
-        message: "Please select a text color. Would you like to select a color from a list or enter a hexidecimal number?",
+        message: "Please select a text color. Would you like to select a color from a list or enter a hexadecimal number?",
         type: 'list',
         choices: ['text-color-list', 'text-hex-color']
     },
     {
-        name: 'textColorName',
+        name: 'textColor',
         message: "Please choose a logo color from the following list:",
         type: 'list',
         choices: ['black', 'white', 'lightgrey', 'grey', 'darkgrey', 'red', 'darkred', 'pink', 'orange', 'goldenrod', 'yellow',
-            'green', 'darkgreen', 'teal', 'lightblue', 'blue', 'darkslateblue', 'indigo', 'violet', 'purple', 'darkbrown']
+            'green', 'darkgreen', 'teal', 'cyan', 'lightblue', 'blue', 'darkslateblue', 'indigo', 'violet', 'purple', 'darkbrown']
         ,
         when: (answers) => answers.textColorChoice === 'text-color-list',
         default: 'black'
     },
     {
-        name: 'hexColorInput',
-        message: "Please enter a 3 or 6-digit hexidecimal color, starting with a '#'. Warning: I will personally judge you if you choose a 3-digit number like a plebian.",
+        name: 'textColor',
+        message: "Please enter a 3 or 6-digit hexadecimal color, starting with a '#'. Warning: I will personally judge you if you choose a 3-digit number like a plebian.",
         type: 'input',
         default: '#ffffff',
         when: (answers) => answers.textColorChoice === 'text-hex-color',
-        validate: (hexResponse) => {
-            if (hexResponse.includes("#")) {
-                const pass = response.match(/^#(?:([0-9a-fA-F]{3}){1,2})$/)
+        validate: (answers) => {
+            if (answers.includes("#")) {
+                const pass = answers.match(/^#(?:([0-9a-fA-F]{3}){1,2})$/)
                 if (pass === null) {
-                    return "Please enter a valid hexidecimal color. After the '#' symbol you must enter three or six digits that are either numbers or the letters a-f."
+                    return "Please enter a valid hexadecimal color. After the '#' symbol you must enter three or six digits that are either numbers or the letters a-f."
                 } else {
                     return true;
                 }
             } else {
-                return "Please enter a valid hexidecimal color. It must start with a '#' symbol, followed by three or six digits that are either numbers or the letters a-f."
+                return "Please enter a valid hexadecimal color. It must start with a '#' symbol, followed by three or six digits that are either numbers or the letters a-f."
             }
         }
     },
@@ -59,53 +61,64 @@ inquirer.prompt([
         name: 'logoShape',
         message: "Please select a shape for your logo from the following list:",
         type: 'list',
-        choices: ['circle', 'triangle', 'inverted-triangle', 'square', 'hexagon'],
+        choices: ['circle', 'triangle', 'inverted triangle', 'square', 'hexagon'],
         default: 'circle'
     },
-    // Since the instructions call for a choice of either a hexidecimal or a simple choice for a list, I'm giving the people the choice to decided which input with a When statement.
-    // I could have listed 50 colors but that would have been an unwieldy interface. I figure people who care deeply will use the hexidecimal choice.
+    // Since the instructions call for a choice of either a hexadecimal or a simple choice for a list, I'm giving the people the choice to decided which input with a When statement.
+    // I could have listed 50 colors but that would have been an unwieldy interface. I figure people who care deeply will use the hexadecimal choice.
     {
         name: 'backgroundColorChoice',
-        message: "Please select a background color. Would you like to select a color from a list or enter a hexidecimal number?",
+        message: "Please select a background color. Would you like to select a color from a list or enter a hexadecimal number?",
         type: 'list',
         choices: ['background-color-list', 'background-hex-color']
     },
     {
-        name: 'backgroundColorName',
+        name: 'backgroundColor',
         message: "Please choose a logo color from the following list:",
         type: 'list',
         choices: ['black', 'white', 'lightgrey', 'grey', 'darkgrey', 'red', 'darkred', 'pink', 'orange', 'goldenrod', 'yellow',
-            'green', 'darkgreen', 'teal', 'lightblue', 'blue', 'darkslateblue', 'indigo', 'violet', 'purple', 'darkbrown']
+            'green', 'darkgreen', 'teal', 'cyan', 'lightblue', 'blue', 'darkslateblue', 'indigo', 'violet', 'purple', 'darkbrown']
         ,
         when: (answers) => answers.backgroundColorChoice === 'background-color-list',
         default: 'white'
     },
     {
-        name: 'backgroundHexColorInput',
-        message: "Please enter a 3 or 6-digit hexidecimal color, starting with a '#'.",
+        name: 'backgroundColor',
+        message: "Please enter a 3 or 6-digit hexadecimal color, starting with a '#'.",
         type: 'input',
         default: '#000000',
-        when: (answers) => answers.textColorChoice === 'background-hex-color',
-        validate: (hexResponse) => {
-            if (hexResponse.includes("#")) {
-                const pass = response.match(/^#(?:([0-9a-fA-F]{3}){1,2})$/)
+        when: (answers) => answers.backgroundColorChoice === 'background-hex-color',
+        validate: (answers) => {
+            if (answers.includes("#")) {
+                const pass = answers.match(/^#(?:([0-9a-fA-F]{3}){1,2})$/)
                 if (pass === null) {
-                    return "Please enter a valid hexidecimal color. After the '#' symbol you must enter three or six digits that are either numbers or the letters a-f."
+                    return "Please enter a valid hexadecimal color. After the '#' symbol you must enter three or six digits that are either numbers or the letters a-f."
                 } else {
                     return true;
                 }
             } else {
-                return "Please enter a valid hexidecimal color. It must start with a '#' symbol, followed by three or six digits that are either numbers or the letters a-f."
+                return "Please enter a valid hexadecimal color. It must start with a '#' symbol, followed by three or six digits that are either numbers or the letters a-f."
             }
         }
     },
-]).then(response => {
-fs.writeFile('./Outputs/logo.svg', generateLogo
-(response), (err) => {
-    if (err) {
-      return console.log(err);
+    // adding a choice of a few fonts was pretty simple, so why not?
+    {
+        name: 'logoFont',
+        message: "Please choose a font for your logo",
+        type: 'list',
+        choices: ['Arial', 'Courier', 'Sans Serif', 'Monospace', 'Impact']
     }
-    console.log('Generated logo.svg');
-  });
-});
+])
+// .then ensures that this happens right after. Kinda intuitive for a JavaScript function.
+    .then(answers => {
+        // The folder path below is just so it doesn't overwrite the project's actual ReadMe file. It should still be retrievable from there.
+        fs.writeFile('./outputs/logo.svg', shapeChooser
+            (answers), (err) => {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log('Generated logo.svg in /outputs folder');
+            });
+    });
+
 

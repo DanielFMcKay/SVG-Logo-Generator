@@ -1,0 +1,9 @@
+<!-- square -->
+<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+
+  <path d="M 60 10 L 240 10 L 240 190 L 60 190 Z" fill="darkred" />
+
+  <text x="150" y="120" font-family="Courier"
+  font-size="60" text-anchor="middle" fill="goldenrod">SVG</text>
+
+</svg>
