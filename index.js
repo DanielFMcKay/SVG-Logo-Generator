@@ -21,12 +21,15 @@ inquirer.prompt([
             else return true
         }
     },
+    // Since the instructions call for a choice of either a hexadecimal or a simple choice for a list, I'm giving the people the choice to decided which input with a When statement.
+    // I could have listed 50 colors but that would have been an unwieldy interface. I figure people who care deeply will use the hexadecimal choice.
     {
         name: 'textColorChoice',
         message: "Please select a text color. Would you like to select a color from a list or enter a hexadecimal number?",
         type: 'list',
         choices: ['text-color-list', 'text-hex-color']
     },
+    // this is for a color from a list
     {
         name: 'textColor',
         message: "Please choose a logo color from the following list:",
@@ -37,6 +40,7 @@ inquirer.prompt([
         when: (answers) => answers.textColorChoice === 'text-color-list',
         default: 'black'
     },
+    // this is for a hexadecimal entry
     {
         name: 'textColor',
         message: "Please enter a 3 or 6-digit hexadecimal color, starting with a '#'. Warning: I will personally judge you if you choose a 3-digit number for being uncreative.",
@@ -64,14 +68,14 @@ inquirer.prompt([
         choices: ['circle', 'triangle', 'inverted triangle', 'square', 'hexagon'],
         default: 'circle'
     },
-    // Since the instructions call for a choice of either a hexadecimal or a simple choice for a list, I'm giving the people the choice to decided which input with a When statement.
-    // I could have listed 50 colors but that would have been an unwieldy interface. I figure people who care deeply will use the hexadecimal choice.
-    {
+    // this is the choice of entry for the fill color
+   {
         name: 'backgroundColorChoice',
         message: "Please select a background color. Would you like to select a color from a list or enter a hexadecimal number?",
         type: 'list',
         choices: ['background-color-list', 'background-hex-color']
     },
+    // this if for a color from a list
     {
         name: 'backgroundColor',
         message: "Please choose a logo color from the following list:",
@@ -82,6 +86,7 @@ inquirer.prompt([
         when: (answers) => answers.backgroundColorChoice === 'background-color-list',
         default: 'white'
     },
+    // this is for a hexadecimal color entered by the user
     {
         name: 'backgroundColor',
         message: "Please enter a 3 or 6-digit hexadecimal color, starting with a '#'.",
